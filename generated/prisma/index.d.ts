@@ -28,6 +28,11 @@ export type Meal = $Result.DefaultSelection<Prisma.$MealPayload>
  * 
  */
 export type Expense = $Result.DefaultSelection<Prisma.$ExpensePayload>
+/**
+ * Model Bazer
+ * 
+ */
+export type Bazer = $Result.DefaultSelection<Prisma.$BazerPayload>
 
 /**
  * Enums
@@ -48,6 +53,14 @@ export const Epurpose: {
 
 export type Epurpose = (typeof Epurpose)[keyof typeof Epurpose]
 
+
+export const TransactionType: {
+  add: 'add',
+  get: 'get'
+};
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -57,6 +70,10 @@ export const UserRole: typeof $Enums.UserRole
 export type Epurpose = $Enums.Epurpose
 
 export const Epurpose: typeof $Enums.Epurpose
+
+export type TransactionType = $Enums.TransactionType
+
+export const TransactionType: typeof $Enums.TransactionType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -179,6 +196,16 @@ export class PrismaClient<
     * ```
     */
   get expense(): Prisma.ExpenseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bazer`: Exposes CRUD operations for the **Bazer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Bazers
+    * const bazers = await prisma.bazer.findMany()
+    * ```
+    */
+  get bazer(): Prisma.BazerDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -621,7 +648,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Meal: 'Meal',
-    Expense: 'Expense'
+    Expense: 'Expense',
+    Bazer: 'Bazer'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -640,7 +668,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "meal" | "expense"
+      modelProps: "user" | "meal" | "expense" | "bazer"
       txIsolationLevel: never
     }
     model: {
@@ -866,6 +894,80 @@ export namespace Prisma {
           }
         }
       }
+      Bazer: {
+        payload: Prisma.$BazerPayload<ExtArgs>
+        fields: Prisma.BazerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BazerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BazerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload>
+          }
+          findFirst: {
+            args: Prisma.BazerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BazerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload>
+          }
+          findMany: {
+            args: Prisma.BazerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload>[]
+          }
+          create: {
+            args: Prisma.BazerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload>
+          }
+          createMany: {
+            args: Prisma.BazerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.BazerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload>
+          }
+          update: {
+            args: Prisma.BazerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload>
+          }
+          deleteMany: {
+            args: Prisma.BazerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BazerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.BazerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BazerPayload>
+          }
+          aggregate: {
+            args: Prisma.BazerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBazer>
+          }
+          groupBy: {
+            args: Prisma.BazerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BazerGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.BazerFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.BazerAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.BazerCountArgs<ExtArgs>
+            result: $Utils.Optional<BazerCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -940,6 +1042,7 @@ export namespace Prisma {
     user?: UserOmit
     meal?: MealOmit
     expense?: ExpenseOmit
+    bazer?: BazerOmit
   }
 
   /* Types for Logging */
@@ -1036,11 +1139,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     Meal: number
     Expense: number
+    Bazer: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Meal?: boolean | UserCountOutputTypeCountMealArgs
     Expense?: boolean | UserCountOutputTypeCountExpenseArgs
+    Bazer?: boolean | UserCountOutputTypeCountBazerArgs
   }
 
   // Custom InputTypes
@@ -1066,6 +1171,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountExpenseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBazerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BazerWhereInput
   }
 
 
@@ -1255,6 +1367,7 @@ export namespace Prisma {
     isDeleted?: boolean
     Meal?: boolean | User$MealArgs<ExtArgs>
     Expense?: boolean | User$ExpenseArgs<ExtArgs>
+    Bazer?: boolean | User$BazerArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1274,6 +1387,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Meal?: boolean | User$MealArgs<ExtArgs>
     Expense?: boolean | User$ExpenseArgs<ExtArgs>
+    Bazer?: boolean | User$BazerArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1282,6 +1396,7 @@ export namespace Prisma {
     objects: {
       Meal: Prisma.$MealPayload<ExtArgs>[]
       Expense: Prisma.$ExpensePayload<ExtArgs>[]
+      Bazer: Prisma.$BazerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1656,6 +1771,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Meal<T extends User$MealArgs<ExtArgs> = {}>(args?: Subset<T, User$MealArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Expense<T extends User$ExpenseArgs<ExtArgs> = {}>(args?: Subset<T, User$ExpenseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Bazer<T extends User$BazerArgs<ExtArgs> = {}>(args?: Subset<T, User$BazerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2107,6 +2223,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * User.Bazer
+   */
+  export type User$BazerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    where?: BazerWhereInput
+    orderBy?: BazerOrderByWithRelationInput | BazerOrderByWithRelationInput[]
+    cursor?: BazerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BazerScalarFieldEnum | BazerScalarFieldEnum[]
   }
 
   /**
@@ -3109,51 +3249,81 @@ export namespace Prisma {
 
   export type AggregateExpense = {
     _count: ExpenseCountAggregateOutputType | null
+    _avg: ExpenseAvgAggregateOutputType | null
+    _sum: ExpenseSumAggregateOutputType | null
     _min: ExpenseMinAggregateOutputType | null
     _max: ExpenseMaxAggregateOutputType | null
+  }
+
+  export type ExpenseAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type ExpenseSumAggregateOutputType = {
+    amount: number | null
   }
 
   export type ExpenseMinAggregateOutputType = {
     id: string | null
     date: Date | null
+    amount: number | null
     user_id: string | null
+    transaction_type: $Enums.TransactionType | null
     purpose: $Enums.Epurpose | null
   }
 
   export type ExpenseMaxAggregateOutputType = {
     id: string | null
     date: Date | null
+    amount: number | null
     user_id: string | null
+    transaction_type: $Enums.TransactionType | null
     purpose: $Enums.Epurpose | null
   }
 
   export type ExpenseCountAggregateOutputType = {
     id: number
     date: number
+    amount: number
     user_id: number
+    transaction_type: number
     purpose: number
     _all: number
   }
 
 
+  export type ExpenseAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type ExpenseSumAggregateInputType = {
+    amount?: true
+  }
+
   export type ExpenseMinAggregateInputType = {
     id?: true
     date?: true
+    amount?: true
     user_id?: true
+    transaction_type?: true
     purpose?: true
   }
 
   export type ExpenseMaxAggregateInputType = {
     id?: true
     date?: true
+    amount?: true
     user_id?: true
+    transaction_type?: true
     purpose?: true
   }
 
   export type ExpenseCountAggregateInputType = {
     id?: true
     date?: true
+    amount?: true
     user_id?: true
+    transaction_type?: true
     purpose?: true
     _all?: true
   }
@@ -3196,6 +3366,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ExpenseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExpenseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ExpenseMinAggregateInputType
@@ -3226,6 +3408,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ExpenseCountAggregateInputType | true
+    _avg?: ExpenseAvgAggregateInputType
+    _sum?: ExpenseSumAggregateInputType
     _min?: ExpenseMinAggregateInputType
     _max?: ExpenseMaxAggregateInputType
   }
@@ -3233,9 +3417,13 @@ export namespace Prisma {
   export type ExpenseGroupByOutputType = {
     id: string
     date: Date
+    amount: number
     user_id: string
+    transaction_type: $Enums.TransactionType
     purpose: $Enums.Epurpose
     _count: ExpenseCountAggregateOutputType | null
+    _avg: ExpenseAvgAggregateOutputType | null
+    _sum: ExpenseSumAggregateOutputType | null
     _min: ExpenseMinAggregateOutputType | null
     _max: ExpenseMaxAggregateOutputType | null
   }
@@ -3257,7 +3445,9 @@ export namespace Prisma {
   export type ExpenseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     date?: boolean
+    amount?: boolean
     user_id?: boolean
+    transaction_type?: boolean
     purpose?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expense"]>
@@ -3267,11 +3457,13 @@ export namespace Prisma {
   export type ExpenseSelectScalar = {
     id?: boolean
     date?: boolean
+    amount?: boolean
     user_id?: boolean
+    transaction_type?: boolean
     purpose?: boolean
   }
 
-  export type ExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "user_id" | "purpose", ExtArgs["result"]["expense"]>
+  export type ExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "amount" | "user_id" | "transaction_type" | "purpose", ExtArgs["result"]["expense"]>
   export type ExpenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3284,7 +3476,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       date: Date
+      amount: number
       user_id: string
+      transaction_type: $Enums.TransactionType
       purpose: $Enums.Epurpose
     }, ExtArgs["result"]["expense"]>
     composites: {}
@@ -3681,7 +3875,9 @@ export namespace Prisma {
   interface ExpenseFieldRefs {
     readonly id: FieldRef<"Expense", 'String'>
     readonly date: FieldRef<"Expense", 'DateTime'>
+    readonly amount: FieldRef<"Expense", 'Int'>
     readonly user_id: FieldRef<"Expense", 'String'>
+    readonly transaction_type: FieldRef<"Expense", 'TransactionType'>
     readonly purpose: FieldRef<"Expense", 'Epurpose'>
   }
     
@@ -4072,6 +4268,1015 @@ export namespace Prisma {
 
 
   /**
+   * Model Bazer
+   */
+
+  export type AggregateBazer = {
+    _count: BazerCountAggregateOutputType | null
+    _avg: BazerAvgAggregateOutputType | null
+    _sum: BazerSumAggregateOutputType | null
+    _min: BazerMinAggregateOutputType | null
+    _max: BazerMaxAggregateOutputType | null
+  }
+
+  export type BazerAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type BazerSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type BazerMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    date: Date | null
+    amount: number | null
+  }
+
+  export type BazerMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    date: Date | null
+    amount: number | null
+  }
+
+  export type BazerCountAggregateOutputType = {
+    id: number
+    user_id: number
+    date: number
+    items: number
+    amount: number
+    _all: number
+  }
+
+
+  export type BazerAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type BazerSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type BazerMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    date?: true
+    amount?: true
+  }
+
+  export type BazerMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    date?: true
+    amount?: true
+  }
+
+  export type BazerCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    date?: true
+    items?: true
+    amount?: true
+    _all?: true
+  }
+
+  export type BazerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Bazer to aggregate.
+     */
+    where?: BazerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Bazers to fetch.
+     */
+    orderBy?: BazerOrderByWithRelationInput | BazerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BazerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Bazers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Bazers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Bazers
+    **/
+    _count?: true | BazerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BazerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BazerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BazerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BazerMaxAggregateInputType
+  }
+
+  export type GetBazerAggregateType<T extends BazerAggregateArgs> = {
+        [P in keyof T & keyof AggregateBazer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBazer[P]>
+      : GetScalarType<T[P], AggregateBazer[P]>
+  }
+
+
+
+
+  export type BazerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BazerWhereInput
+    orderBy?: BazerOrderByWithAggregationInput | BazerOrderByWithAggregationInput[]
+    by: BazerScalarFieldEnum[] | BazerScalarFieldEnum
+    having?: BazerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BazerCountAggregateInputType | true
+    _avg?: BazerAvgAggregateInputType
+    _sum?: BazerSumAggregateInputType
+    _min?: BazerMinAggregateInputType
+    _max?: BazerMaxAggregateInputType
+  }
+
+  export type BazerGroupByOutputType = {
+    id: string
+    user_id: string
+    date: Date
+    items: string[]
+    amount: number
+    _count: BazerCountAggregateOutputType | null
+    _avg: BazerAvgAggregateOutputType | null
+    _sum: BazerSumAggregateOutputType | null
+    _min: BazerMinAggregateOutputType | null
+    _max: BazerMaxAggregateOutputType | null
+  }
+
+  type GetBazerGroupByPayload<T extends BazerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BazerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BazerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BazerGroupByOutputType[P]>
+            : GetScalarType<T[P], BazerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BazerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    date?: boolean
+    items?: boolean
+    amount?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bazer"]>
+
+
+
+  export type BazerSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    date?: boolean
+    items?: boolean
+    amount?: boolean
+  }
+
+  export type BazerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "date" | "items" | "amount", ExtArgs["result"]["bazer"]>
+  export type BazerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BazerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Bazer"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id: string
+      date: Date
+      items: string[]
+      amount: number
+    }, ExtArgs["result"]["bazer"]>
+    composites: {}
+  }
+
+  type BazerGetPayload<S extends boolean | null | undefined | BazerDefaultArgs> = $Result.GetResult<Prisma.$BazerPayload, S>
+
+  type BazerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BazerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BazerCountAggregateInputType | true
+    }
+
+  export interface BazerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Bazer'], meta: { name: 'Bazer' } }
+    /**
+     * Find zero or one Bazer that matches the filter.
+     * @param {BazerFindUniqueArgs} args - Arguments to find a Bazer
+     * @example
+     * // Get one Bazer
+     * const bazer = await prisma.bazer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BazerFindUniqueArgs>(args: SelectSubset<T, BazerFindUniqueArgs<ExtArgs>>): Prisma__BazerClient<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Bazer that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BazerFindUniqueOrThrowArgs} args - Arguments to find a Bazer
+     * @example
+     * // Get one Bazer
+     * const bazer = await prisma.bazer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BazerFindUniqueOrThrowArgs>(args: SelectSubset<T, BazerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BazerClient<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Bazer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BazerFindFirstArgs} args - Arguments to find a Bazer
+     * @example
+     * // Get one Bazer
+     * const bazer = await prisma.bazer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BazerFindFirstArgs>(args?: SelectSubset<T, BazerFindFirstArgs<ExtArgs>>): Prisma__BazerClient<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Bazer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BazerFindFirstOrThrowArgs} args - Arguments to find a Bazer
+     * @example
+     * // Get one Bazer
+     * const bazer = await prisma.bazer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BazerFindFirstOrThrowArgs>(args?: SelectSubset<T, BazerFindFirstOrThrowArgs<ExtArgs>>): Prisma__BazerClient<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Bazers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BazerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Bazers
+     * const bazers = await prisma.bazer.findMany()
+     * 
+     * // Get first 10 Bazers
+     * const bazers = await prisma.bazer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bazerWithIdOnly = await prisma.bazer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BazerFindManyArgs>(args?: SelectSubset<T, BazerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Bazer.
+     * @param {BazerCreateArgs} args - Arguments to create a Bazer.
+     * @example
+     * // Create one Bazer
+     * const Bazer = await prisma.bazer.create({
+     *   data: {
+     *     // ... data to create a Bazer
+     *   }
+     * })
+     * 
+     */
+    create<T extends BazerCreateArgs>(args: SelectSubset<T, BazerCreateArgs<ExtArgs>>): Prisma__BazerClient<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Bazers.
+     * @param {BazerCreateManyArgs} args - Arguments to create many Bazers.
+     * @example
+     * // Create many Bazers
+     * const bazer = await prisma.bazer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BazerCreateManyArgs>(args?: SelectSubset<T, BazerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Bazer.
+     * @param {BazerDeleteArgs} args - Arguments to delete one Bazer.
+     * @example
+     * // Delete one Bazer
+     * const Bazer = await prisma.bazer.delete({
+     *   where: {
+     *     // ... filter to delete one Bazer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BazerDeleteArgs>(args: SelectSubset<T, BazerDeleteArgs<ExtArgs>>): Prisma__BazerClient<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Bazer.
+     * @param {BazerUpdateArgs} args - Arguments to update one Bazer.
+     * @example
+     * // Update one Bazer
+     * const bazer = await prisma.bazer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BazerUpdateArgs>(args: SelectSubset<T, BazerUpdateArgs<ExtArgs>>): Prisma__BazerClient<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Bazers.
+     * @param {BazerDeleteManyArgs} args - Arguments to filter Bazers to delete.
+     * @example
+     * // Delete a few Bazers
+     * const { count } = await prisma.bazer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BazerDeleteManyArgs>(args?: SelectSubset<T, BazerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Bazers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BazerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Bazers
+     * const bazer = await prisma.bazer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BazerUpdateManyArgs>(args: SelectSubset<T, BazerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Bazer.
+     * @param {BazerUpsertArgs} args - Arguments to update or create a Bazer.
+     * @example
+     * // Update or create a Bazer
+     * const bazer = await prisma.bazer.upsert({
+     *   create: {
+     *     // ... data to create a Bazer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Bazer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BazerUpsertArgs>(args: SelectSubset<T, BazerUpsertArgs<ExtArgs>>): Prisma__BazerClient<$Result.GetResult<Prisma.$BazerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Bazers that matches the filter.
+     * @param {BazerFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const bazer = await prisma.bazer.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: BazerFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a Bazer.
+     * @param {BazerAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const bazer = await prisma.bazer.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: BazerAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of Bazers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BazerCountArgs} args - Arguments to filter Bazers to count.
+     * @example
+     * // Count the number of Bazers
+     * const count = await prisma.bazer.count({
+     *   where: {
+     *     // ... the filter for the Bazers we want to count
+     *   }
+     * })
+    **/
+    count<T extends BazerCountArgs>(
+      args?: Subset<T, BazerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BazerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Bazer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BazerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BazerAggregateArgs>(args: Subset<T, BazerAggregateArgs>): Prisma.PrismaPromise<GetBazerAggregateType<T>>
+
+    /**
+     * Group by Bazer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BazerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BazerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BazerGroupByArgs['orderBy'] }
+        : { orderBy?: BazerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BazerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBazerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Bazer model
+   */
+  readonly fields: BazerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Bazer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BazerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Bazer model
+   */
+  interface BazerFieldRefs {
+    readonly id: FieldRef<"Bazer", 'String'>
+    readonly user_id: FieldRef<"Bazer", 'String'>
+    readonly date: FieldRef<"Bazer", 'DateTime'>
+    readonly items: FieldRef<"Bazer", 'String[]'>
+    readonly amount: FieldRef<"Bazer", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Bazer findUnique
+   */
+  export type BazerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * Filter, which Bazer to fetch.
+     */
+    where: BazerWhereUniqueInput
+  }
+
+  /**
+   * Bazer findUniqueOrThrow
+   */
+  export type BazerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * Filter, which Bazer to fetch.
+     */
+    where: BazerWhereUniqueInput
+  }
+
+  /**
+   * Bazer findFirst
+   */
+  export type BazerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * Filter, which Bazer to fetch.
+     */
+    where?: BazerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Bazers to fetch.
+     */
+    orderBy?: BazerOrderByWithRelationInput | BazerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Bazers.
+     */
+    cursor?: BazerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Bazers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Bazers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Bazers.
+     */
+    distinct?: BazerScalarFieldEnum | BazerScalarFieldEnum[]
+  }
+
+  /**
+   * Bazer findFirstOrThrow
+   */
+  export type BazerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * Filter, which Bazer to fetch.
+     */
+    where?: BazerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Bazers to fetch.
+     */
+    orderBy?: BazerOrderByWithRelationInput | BazerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Bazers.
+     */
+    cursor?: BazerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Bazers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Bazers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Bazers.
+     */
+    distinct?: BazerScalarFieldEnum | BazerScalarFieldEnum[]
+  }
+
+  /**
+   * Bazer findMany
+   */
+  export type BazerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * Filter, which Bazers to fetch.
+     */
+    where?: BazerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Bazers to fetch.
+     */
+    orderBy?: BazerOrderByWithRelationInput | BazerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Bazers.
+     */
+    cursor?: BazerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Bazers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Bazers.
+     */
+    skip?: number
+    distinct?: BazerScalarFieldEnum | BazerScalarFieldEnum[]
+  }
+
+  /**
+   * Bazer create
+   */
+  export type BazerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Bazer.
+     */
+    data: XOR<BazerCreateInput, BazerUncheckedCreateInput>
+  }
+
+  /**
+   * Bazer createMany
+   */
+  export type BazerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Bazers.
+     */
+    data: BazerCreateManyInput | BazerCreateManyInput[]
+  }
+
+  /**
+   * Bazer update
+   */
+  export type BazerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Bazer.
+     */
+    data: XOR<BazerUpdateInput, BazerUncheckedUpdateInput>
+    /**
+     * Choose, which Bazer to update.
+     */
+    where: BazerWhereUniqueInput
+  }
+
+  /**
+   * Bazer updateMany
+   */
+  export type BazerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Bazers.
+     */
+    data: XOR<BazerUpdateManyMutationInput, BazerUncheckedUpdateManyInput>
+    /**
+     * Filter which Bazers to update
+     */
+    where?: BazerWhereInput
+    /**
+     * Limit how many Bazers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Bazer upsert
+   */
+  export type BazerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Bazer to update in case it exists.
+     */
+    where: BazerWhereUniqueInput
+    /**
+     * In case the Bazer found by the `where` argument doesn't exist, create a new Bazer with this data.
+     */
+    create: XOR<BazerCreateInput, BazerUncheckedCreateInput>
+    /**
+     * In case the Bazer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BazerUpdateInput, BazerUncheckedUpdateInput>
+  }
+
+  /**
+   * Bazer delete
+   */
+  export type BazerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+    /**
+     * Filter which Bazer to delete.
+     */
+    where: BazerWhereUniqueInput
+  }
+
+  /**
+   * Bazer deleteMany
+   */
+  export type BazerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Bazers to delete
+     */
+    where?: BazerWhereInput
+    /**
+     * Limit how many Bazers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Bazer findRaw
+   */
+  export type BazerFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * Bazer aggregateRaw
+   */
+  export type BazerAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * Bazer without action
+   */
+  export type BazerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bazer
+     */
+    select?: BazerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bazer
+     */
+    omit?: BazerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BazerInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4102,11 +5307,24 @@ export namespace Prisma {
   export const ExpenseScalarFieldEnum: {
     id: 'id',
     date: 'date',
+    amount: 'amount',
     user_id: 'user_id',
+    transaction_type: 'transaction_type',
     purpose: 'purpose'
   };
 
   export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+  export const BazerScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    date: 'date',
+    items: 'items',
+    amount: 'amount'
+  };
+
+  export type BazerScalarFieldEnum = (typeof BazerScalarFieldEnum)[keyof typeof BazerScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4187,6 +5405,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransactionType'
+   */
+  export type EnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransactionType[]'
+   */
+  export type ListEnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Epurpose'
    */
   export type EnumEpurposeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Epurpose'>
@@ -4201,16 +5447,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -4230,6 +5476,7 @@ export namespace Prisma {
     isDeleted?: BoolFilter<"User"> | boolean
     Meal?: MealListRelationFilter
     Expense?: ExpenseListRelationFilter
+    Bazer?: BazerListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4242,6 +5489,7 @@ export namespace Prisma {
     isDeleted?: SortOrder
     Meal?: MealOrderByRelationAggregateInput
     Expense?: ExpenseOrderByRelationAggregateInput
+    Bazer?: BazerOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4257,6 +5505,7 @@ export namespace Prisma {
     isDeleted?: BoolFilter<"User"> | boolean
     Meal?: MealListRelationFilter
     Expense?: ExpenseListRelationFilter
+    Bazer?: BazerListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -4346,7 +5595,9 @@ export namespace Prisma {
     NOT?: ExpenseWhereInput | ExpenseWhereInput[]
     id?: StringFilter<"Expense"> | string
     date?: DateTimeFilter<"Expense"> | Date | string
+    amount?: IntFilter<"Expense"> | number
     user_id?: StringFilter<"Expense"> | string
+    transaction_type?: EnumTransactionTypeFilter<"Expense"> | $Enums.TransactionType
     purpose?: EnumEpurposeFilter<"Expense"> | $Enums.Epurpose
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -4354,7 +5605,9 @@ export namespace Prisma {
   export type ExpenseOrderByWithRelationInput = {
     id?: SortOrder
     date?: SortOrder
+    amount?: SortOrder
     user_id?: SortOrder
+    transaction_type?: SortOrder
     purpose?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -4365,7 +5618,9 @@ export namespace Prisma {
     OR?: ExpenseWhereInput[]
     NOT?: ExpenseWhereInput | ExpenseWhereInput[]
     date?: DateTimeFilter<"Expense"> | Date | string
+    amount?: IntFilter<"Expense"> | number
     user_id?: StringFilter<"Expense"> | string
+    transaction_type?: EnumTransactionTypeFilter<"Expense"> | $Enums.TransactionType
     purpose?: EnumEpurposeFilter<"Expense"> | $Enums.Epurpose
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -4373,11 +5628,15 @@ export namespace Prisma {
   export type ExpenseOrderByWithAggregationInput = {
     id?: SortOrder
     date?: SortOrder
+    amount?: SortOrder
     user_id?: SortOrder
+    transaction_type?: SortOrder
     purpose?: SortOrder
     _count?: ExpenseCountOrderByAggregateInput
+    _avg?: ExpenseAvgOrderByAggregateInput
     _max?: ExpenseMaxOrderByAggregateInput
     _min?: ExpenseMinOrderByAggregateInput
+    _sum?: ExpenseSumOrderByAggregateInput
   }
 
   export type ExpenseScalarWhereWithAggregatesInput = {
@@ -4386,8 +5645,67 @@ export namespace Prisma {
     NOT?: ExpenseScalarWhereWithAggregatesInput | ExpenseScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Expense"> | string
     date?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
+    amount?: IntWithAggregatesFilter<"Expense"> | number
     user_id?: StringWithAggregatesFilter<"Expense"> | string
+    transaction_type?: EnumTransactionTypeWithAggregatesFilter<"Expense"> | $Enums.TransactionType
     purpose?: EnumEpurposeWithAggregatesFilter<"Expense"> | $Enums.Epurpose
+  }
+
+  export type BazerWhereInput = {
+    AND?: BazerWhereInput | BazerWhereInput[]
+    OR?: BazerWhereInput[]
+    NOT?: BazerWhereInput | BazerWhereInput[]
+    id?: StringFilter<"Bazer"> | string
+    user_id?: StringFilter<"Bazer"> | string
+    date?: DateTimeFilter<"Bazer"> | Date | string
+    items?: StringNullableListFilter<"Bazer">
+    amount?: IntFilter<"Bazer"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BazerOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    date?: SortOrder
+    items?: SortOrder
+    amount?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BazerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BazerWhereInput | BazerWhereInput[]
+    OR?: BazerWhereInput[]
+    NOT?: BazerWhereInput | BazerWhereInput[]
+    user_id?: StringFilter<"Bazer"> | string
+    date?: DateTimeFilter<"Bazer"> | Date | string
+    items?: StringNullableListFilter<"Bazer">
+    amount?: IntFilter<"Bazer"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type BazerOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    date?: SortOrder
+    items?: SortOrder
+    amount?: SortOrder
+    _count?: BazerCountOrderByAggregateInput
+    _avg?: BazerAvgOrderByAggregateInput
+    _max?: BazerMaxOrderByAggregateInput
+    _min?: BazerMinOrderByAggregateInput
+    _sum?: BazerSumOrderByAggregateInput
+  }
+
+  export type BazerScalarWhereWithAggregatesInput = {
+    AND?: BazerScalarWhereWithAggregatesInput | BazerScalarWhereWithAggregatesInput[]
+    OR?: BazerScalarWhereWithAggregatesInput[]
+    NOT?: BazerScalarWhereWithAggregatesInput | BazerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Bazer"> | string
+    user_id?: StringWithAggregatesFilter<"Bazer"> | string
+    date?: DateTimeWithAggregatesFilter<"Bazer"> | Date | string
+    items?: StringNullableListFilter<"Bazer">
+    amount?: IntWithAggregatesFilter<"Bazer"> | number
   }
 
   export type UserCreateInput = {
@@ -4400,6 +5718,7 @@ export namespace Prisma {
     isDeleted?: boolean
     Meal?: MealCreateNestedManyWithoutUserInput
     Expense?: ExpenseCreateNestedManyWithoutUserInput
+    Bazer?: BazerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -4412,6 +5731,7 @@ export namespace Prisma {
     isDeleted?: boolean
     Meal?: MealUncheckedCreateNestedManyWithoutUserInput
     Expense?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    Bazer?: BazerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -4423,6 +5743,7 @@ export namespace Prisma {
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     Meal?: MealUpdateManyWithoutUserNestedInput
     Expense?: ExpenseUpdateManyWithoutUserNestedInput
+    Bazer?: BazerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -4434,6 +5755,7 @@ export namespace Prisma {
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     Meal?: MealUncheckedUpdateManyWithoutUserNestedInput
     Expense?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    Bazer?: BazerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -4517,46 +5839,111 @@ export namespace Prisma {
 
   export type ExpenseCreateInput = {
     id?: string
-    date: Date | string
+    date?: Date | string
+    amount: number
+    transaction_type: $Enums.TransactionType
     purpose: $Enums.Epurpose
     user: UserCreateNestedOneWithoutExpenseInput
   }
 
   export type ExpenseUncheckedCreateInput = {
     id?: string
-    date: Date | string
+    date?: Date | string
+    amount: number
     user_id: string
+    transaction_type: $Enums.TransactionType
     purpose: $Enums.Epurpose
   }
 
   export type ExpenseUpdateInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: IntFieldUpdateOperationsInput | number
+    transaction_type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     purpose?: EnumEpurposeFieldUpdateOperationsInput | $Enums.Epurpose
     user?: UserUpdateOneRequiredWithoutExpenseNestedInput
   }
 
   export type ExpenseUncheckedUpdateInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string
+    transaction_type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     purpose?: EnumEpurposeFieldUpdateOperationsInput | $Enums.Epurpose
   }
 
   export type ExpenseCreateManyInput = {
     id?: string
-    date: Date | string
+    date?: Date | string
+    amount: number
     user_id: string
+    transaction_type: $Enums.TransactionType
     purpose: $Enums.Epurpose
   }
 
   export type ExpenseUpdateManyMutationInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: IntFieldUpdateOperationsInput | number
+    transaction_type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     purpose?: EnumEpurposeFieldUpdateOperationsInput | $Enums.Epurpose
   }
 
   export type ExpenseUncheckedUpdateManyInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: IntFieldUpdateOperationsInput | number
     user_id?: StringFieldUpdateOperationsInput | string
+    transaction_type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     purpose?: EnumEpurposeFieldUpdateOperationsInput | $Enums.Epurpose
+  }
+
+  export type BazerCreateInput = {
+    id?: string
+    date?: Date | string
+    items?: BazerCreateitemsInput | string[]
+    amount: number
+    user: UserCreateNestedOneWithoutBazerInput
+  }
+
+  export type BazerUncheckedCreateInput = {
+    id?: string
+    user_id: string
+    date?: Date | string
+    items?: BazerCreateitemsInput | string[]
+    amount: number
+  }
+
+  export type BazerUpdateInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: BazerUpdateitemsInput | string[]
+    amount?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutBazerNestedInput
+  }
+
+  export type BazerUncheckedUpdateInput = {
+    user_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: BazerUpdateitemsInput | string[]
+    amount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BazerCreateManyInput = {
+    id?: string
+    user_id: string
+    date?: Date | string
+    items?: BazerCreateitemsInput | string[]
+    amount: number
+  }
+
+  export type BazerUpdateManyMutationInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: BazerUpdateitemsInput | string[]
+    amount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BazerUncheckedUpdateManyInput = {
+    user_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: BazerUpdateitemsInput | string[]
+    amount?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -4614,11 +6001,21 @@ export namespace Prisma {
     none?: ExpenseWhereInput
   }
 
+  export type BazerListRelationFilter = {
+    every?: BazerWhereInput
+    some?: BazerWhereInput
+    none?: BazerWhereInput
+  }
+
   export type MealOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type ExpenseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BazerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -4784,6 +6181,24 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type EnumTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
   export type EnumEpurposeFilter<$PrismaModel = never> = {
     equals?: $Enums.Epurpose | EnumEpurposeFieldRefInput<$PrismaModel>
     in?: $Enums.Epurpose[] | ListEnumEpurposeFieldRefInput<$PrismaModel>
@@ -4794,22 +6209,62 @@ export namespace Prisma {
   export type ExpenseCountOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
+    amount?: SortOrder
     user_id?: SortOrder
+    transaction_type?: SortOrder
     purpose?: SortOrder
+  }
+
+  export type ExpenseAvgOrderByAggregateInput = {
+    amount?: SortOrder
   }
 
   export type ExpenseMaxOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
+    amount?: SortOrder
     user_id?: SortOrder
+    transaction_type?: SortOrder
     purpose?: SortOrder
   }
 
   export type ExpenseMinOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
+    amount?: SortOrder
     user_id?: SortOrder
+    transaction_type?: SortOrder
     purpose?: SortOrder
+  }
+
+  export type ExpenseSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
   }
 
   export type EnumEpurposeWithAggregatesFilter<$PrismaModel = never> = {
@@ -4820,6 +6275,44 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEpurposeFilter<$PrismaModel>
     _max?: NestedEnumEpurposeFilter<$PrismaModel>
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type BazerCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    date?: SortOrder
+    items?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type BazerAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type BazerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    date?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type BazerMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    date?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type BazerSumOrderByAggregateInput = {
+    amount?: SortOrder
   }
 
   export type MealCreateNestedManyWithoutUserInput = {
@@ -4836,6 +6329,13 @@ export namespace Prisma {
     connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
   }
 
+  export type BazerCreateNestedManyWithoutUserInput = {
+    create?: XOR<BazerCreateWithoutUserInput, BazerUncheckedCreateWithoutUserInput> | BazerCreateWithoutUserInput[] | BazerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BazerCreateOrConnectWithoutUserInput | BazerCreateOrConnectWithoutUserInput[]
+    createMany?: BazerCreateManyUserInputEnvelope
+    connect?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+  }
+
   export type MealUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<MealCreateWithoutUserInput, MealUncheckedCreateWithoutUserInput> | MealCreateWithoutUserInput[] | MealUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MealCreateOrConnectWithoutUserInput | MealCreateOrConnectWithoutUserInput[]
@@ -4848,6 +6348,13 @@ export namespace Prisma {
     connectOrCreate?: ExpenseCreateOrConnectWithoutUserInput | ExpenseCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseCreateManyUserInputEnvelope
     connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+  }
+
+  export type BazerUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BazerCreateWithoutUserInput, BazerUncheckedCreateWithoutUserInput> | BazerCreateWithoutUserInput[] | BazerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BazerCreateOrConnectWithoutUserInput | BazerCreateOrConnectWithoutUserInput[]
+    createMany?: BazerCreateManyUserInputEnvelope
+    connect?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -4895,6 +6402,20 @@ export namespace Prisma {
     deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
   }
 
+  export type BazerUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BazerCreateWithoutUserInput, BazerUncheckedCreateWithoutUserInput> | BazerCreateWithoutUserInput[] | BazerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BazerCreateOrConnectWithoutUserInput | BazerCreateOrConnectWithoutUserInput[]
+    upsert?: BazerUpsertWithWhereUniqueWithoutUserInput | BazerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BazerCreateManyUserInputEnvelope
+    set?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+    disconnect?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+    delete?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+    connect?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+    update?: BazerUpdateWithWhereUniqueWithoutUserInput | BazerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BazerUpdateManyWithWhereWithoutUserInput | BazerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BazerScalarWhereInput | BazerScalarWhereInput[]
+  }
+
   export type MealUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<MealCreateWithoutUserInput, MealUncheckedCreateWithoutUserInput> | MealCreateWithoutUserInput[] | MealUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MealCreateOrConnectWithoutUserInput | MealCreateOrConnectWithoutUserInput[]
@@ -4923,6 +6444,20 @@ export namespace Prisma {
     deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
   }
 
+  export type BazerUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BazerCreateWithoutUserInput, BazerUncheckedCreateWithoutUserInput> | BazerCreateWithoutUserInput[] | BazerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BazerCreateOrConnectWithoutUserInput | BazerCreateOrConnectWithoutUserInput[]
+    upsert?: BazerUpsertWithWhereUniqueWithoutUserInput | BazerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BazerCreateManyUserInputEnvelope
+    set?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+    disconnect?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+    delete?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+    connect?: BazerWhereUniqueInput | BazerWhereUniqueInput[]
+    update?: BazerUpdateWithWhereUniqueWithoutUserInput | BazerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BazerUpdateManyWithWhereWithoutUserInput | BazerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BazerScalarWhereInput | BazerScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutMealInput = {
     create?: XOR<UserCreateWithoutMealInput, UserUncheckedCreateWithoutMealInput>
     connectOrCreate?: UserCreateOrConnectWithoutMealInput
@@ -4947,6 +6482,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnumTransactionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TransactionType
+  }
+
   export type EnumEpurposeFieldUpdateOperationsInput = {
     set?: $Enums.Epurpose
   }
@@ -4957,6 +6504,29 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutExpenseInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutExpenseInput, UserUpdateWithoutExpenseInput>, UserUncheckedUpdateWithoutExpenseInput>
+  }
+
+  export type BazerCreateitemsInput = {
+    set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutBazerInput = {
+    create?: XOR<UserCreateWithoutBazerInput, UserUncheckedCreateWithoutBazerInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBazerInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BazerUpdateitemsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdateOneRequiredWithoutBazerNestedInput = {
+    create?: XOR<UserCreateWithoutBazerInput, UserUncheckedCreateWithoutBazerInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBazerInput
+    upsert?: UserUpsertWithoutBazerInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBazerInput, UserUpdateWithoutBazerInput>, UserUncheckedUpdateWithoutBazerInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5112,11 +6682,55 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
   }
 
+  export type NestedEnumTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
   export type NestedEnumEpurposeFilter<$PrismaModel = never> = {
     equals?: $Enums.Epurpose | EnumEpurposeFieldRefInput<$PrismaModel>
     in?: $Enums.Epurpose[] | ListEnumEpurposeFieldRefInput<$PrismaModel>
     notIn?: $Enums.Epurpose[] | ListEnumEpurposeFieldRefInput<$PrismaModel>
     not?: NestedEnumEpurposeFilter<$PrismaModel> | $Enums.Epurpose
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumEpurposeWithAggregatesFilter<$PrismaModel = never> = {
@@ -5154,13 +6768,17 @@ export namespace Prisma {
 
   export type ExpenseCreateWithoutUserInput = {
     id?: string
-    date: Date | string
+    date?: Date | string
+    amount: number
+    transaction_type: $Enums.TransactionType
     purpose: $Enums.Epurpose
   }
 
   export type ExpenseUncheckedCreateWithoutUserInput = {
     id?: string
-    date: Date | string
+    date?: Date | string
+    amount: number
+    transaction_type: $Enums.TransactionType
     purpose: $Enums.Epurpose
   }
 
@@ -5171,6 +6789,29 @@ export namespace Prisma {
 
   export type ExpenseCreateManyUserInputEnvelope = {
     data: ExpenseCreateManyUserInput | ExpenseCreateManyUserInput[]
+  }
+
+  export type BazerCreateWithoutUserInput = {
+    id?: string
+    date?: Date | string
+    items?: BazerCreateitemsInput | string[]
+    amount: number
+  }
+
+  export type BazerUncheckedCreateWithoutUserInput = {
+    id?: string
+    date?: Date | string
+    items?: BazerCreateitemsInput | string[]
+    amount: number
+  }
+
+  export type BazerCreateOrConnectWithoutUserInput = {
+    where: BazerWhereUniqueInput
+    create: XOR<BazerCreateWithoutUserInput, BazerUncheckedCreateWithoutUserInput>
+  }
+
+  export type BazerCreateManyUserInputEnvelope = {
+    data: BazerCreateManyUserInput | BazerCreateManyUserInput[]
   }
 
   export type MealUpsertWithWhereUniqueWithoutUserInput = {
@@ -5222,8 +6863,37 @@ export namespace Prisma {
     NOT?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
     id?: StringFilter<"Expense"> | string
     date?: DateTimeFilter<"Expense"> | Date | string
+    amount?: IntFilter<"Expense"> | number
     user_id?: StringFilter<"Expense"> | string
+    transaction_type?: EnumTransactionTypeFilter<"Expense"> | $Enums.TransactionType
     purpose?: EnumEpurposeFilter<"Expense"> | $Enums.Epurpose
+  }
+
+  export type BazerUpsertWithWhereUniqueWithoutUserInput = {
+    where: BazerWhereUniqueInput
+    update: XOR<BazerUpdateWithoutUserInput, BazerUncheckedUpdateWithoutUserInput>
+    create: XOR<BazerCreateWithoutUserInput, BazerUncheckedCreateWithoutUserInput>
+  }
+
+  export type BazerUpdateWithWhereUniqueWithoutUserInput = {
+    where: BazerWhereUniqueInput
+    data: XOR<BazerUpdateWithoutUserInput, BazerUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BazerUpdateManyWithWhereWithoutUserInput = {
+    where: BazerScalarWhereInput
+    data: XOR<BazerUpdateManyMutationInput, BazerUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BazerScalarWhereInput = {
+    AND?: BazerScalarWhereInput | BazerScalarWhereInput[]
+    OR?: BazerScalarWhereInput[]
+    NOT?: BazerScalarWhereInput | BazerScalarWhereInput[]
+    id?: StringFilter<"Bazer"> | string
+    user_id?: StringFilter<"Bazer"> | string
+    date?: DateTimeFilter<"Bazer"> | Date | string
+    items?: StringNullableListFilter<"Bazer">
+    amount?: IntFilter<"Bazer"> | number
   }
 
   export type UserCreateWithoutMealInput = {
@@ -5235,6 +6905,7 @@ export namespace Prisma {
     photo?: string | null
     isDeleted?: boolean
     Expense?: ExpenseCreateNestedManyWithoutUserInput
+    Bazer?: BazerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMealInput = {
@@ -5246,6 +6917,7 @@ export namespace Prisma {
     photo?: string | null
     isDeleted?: boolean
     Expense?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    Bazer?: BazerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMealInput = {
@@ -5272,6 +6944,7 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     Expense?: ExpenseUpdateManyWithoutUserNestedInput
+    Bazer?: BazerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMealInput = {
@@ -5282,6 +6955,7 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     Expense?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    Bazer?: BazerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutExpenseInput = {
@@ -5293,6 +6967,7 @@ export namespace Prisma {
     photo?: string | null
     isDeleted?: boolean
     Meal?: MealCreateNestedManyWithoutUserInput
+    Bazer?: BazerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExpenseInput = {
@@ -5304,6 +6979,7 @@ export namespace Prisma {
     photo?: string | null
     isDeleted?: boolean
     Meal?: MealUncheckedCreateNestedManyWithoutUserInput
+    Bazer?: BazerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExpenseInput = {
@@ -5330,6 +7006,7 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     Meal?: MealUpdateManyWithoutUserNestedInput
+    Bazer?: BazerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpenseInput = {
@@ -5340,6 +7017,69 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     Meal?: MealUncheckedUpdateManyWithoutUserNestedInput
+    Bazer?: BazerUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBazerInput = {
+    id?: string
+    name: string
+    email: string
+    phone: string
+    role?: $Enums.UserRole
+    photo?: string | null
+    isDeleted?: boolean
+    Meal?: MealCreateNestedManyWithoutUserInput
+    Expense?: ExpenseCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBazerInput = {
+    id?: string
+    name: string
+    email: string
+    phone: string
+    role?: $Enums.UserRole
+    photo?: string | null
+    isDeleted?: boolean
+    Meal?: MealUncheckedCreateNestedManyWithoutUserInput
+    Expense?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBazerInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBazerInput, UserUncheckedCreateWithoutBazerInput>
+  }
+
+  export type UserUpsertWithoutBazerInput = {
+    update: XOR<UserUpdateWithoutBazerInput, UserUncheckedUpdateWithoutBazerInput>
+    create: XOR<UserCreateWithoutBazerInput, UserUncheckedCreateWithoutBazerInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBazerInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBazerInput, UserUncheckedUpdateWithoutBazerInput>
+  }
+
+  export type UserUpdateWithoutBazerInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    Meal?: MealUpdateManyWithoutUserNestedInput
+    Expense?: ExpenseUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBazerInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    Meal?: MealUncheckedUpdateManyWithoutUserNestedInput
+    Expense?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MealCreateManyUserInput = {
@@ -5351,8 +7091,17 @@ export namespace Prisma {
 
   export type ExpenseCreateManyUserInput = {
     id?: string
-    date: Date | string
+    date?: Date | string
+    amount: number
+    transaction_type: $Enums.TransactionType
     purpose: $Enums.Epurpose
+  }
+
+  export type BazerCreateManyUserInput = {
+    id?: string
+    date?: Date | string
+    items?: BazerCreateitemsInput | string[]
+    amount: number
   }
 
   export type MealUpdateWithoutUserInput = {
@@ -5375,17 +7124,41 @@ export namespace Prisma {
 
   export type ExpenseUpdateWithoutUserInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: IntFieldUpdateOperationsInput | number
+    transaction_type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     purpose?: EnumEpurposeFieldUpdateOperationsInput | $Enums.Epurpose
   }
 
   export type ExpenseUncheckedUpdateWithoutUserInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: IntFieldUpdateOperationsInput | number
+    transaction_type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     purpose?: EnumEpurposeFieldUpdateOperationsInput | $Enums.Epurpose
   }
 
   export type ExpenseUncheckedUpdateManyWithoutUserInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: IntFieldUpdateOperationsInput | number
+    transaction_type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     purpose?: EnumEpurposeFieldUpdateOperationsInput | $Enums.Epurpose
+  }
+
+  export type BazerUpdateWithoutUserInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: BazerUpdateitemsInput | string[]
+    amount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BazerUncheckedUpdateWithoutUserInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: BazerUpdateitemsInput | string[]
+    amount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BazerUncheckedUpdateManyWithoutUserInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: BazerUpdateitemsInput | string[]
+    amount?: IntFieldUpdateOperationsInput | number
   }
 
 

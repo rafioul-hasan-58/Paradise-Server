@@ -131,8 +131,18 @@ exports.Prisma.MealScalarFieldEnum = {
 exports.Prisma.ExpenseScalarFieldEnum = {
   id: 'id',
   date: 'date',
+  amount: 'amount',
   user_id: 'user_id',
+  transaction_type: 'transaction_type',
   purpose: 'purpose'
+};
+
+exports.Prisma.BazerScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  date: 'date',
+  items: 'items',
+  amount: 'amount'
 };
 
 exports.Prisma.SortOrder = {
@@ -149,6 +159,11 @@ exports.UserRole = exports.$Enums.UserRole = {
   admin: 'admin'
 };
 
+exports.TransactionType = exports.$Enums.TransactionType = {
+  add: 'add',
+  get: 'get'
+};
+
 exports.Epurpose = exports.$Enums.Epurpose = {
   meal: 'meal',
   rent: 'rent'
@@ -157,7 +172,8 @@ exports.Epurpose = exports.$Enums.Epurpose = {
 exports.Prisma.ModelName = {
   User: 'User',
   Meal: 'Meal',
-  Expense: 'Expense'
+  Expense: 'Expense',
+  Bazer: 'Bazer'
 };
 
 /**

@@ -15,15 +15,16 @@ datasource db {
 }
 
 model User {
-  id      String    @id @default(auto()) @map("_id") @db.ObjectId
-  name    String
-  email   String    @unique
-  phone   String
-  role    UserRole  @default(user)
-  photo   String?
-  Meal    Meal[]
-  Expense Expense[]
-  isDeleted Boolean @default(false)
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String    @unique
+  phone     String
+  role      UserRole  @default(user)
+  photo     String?
+  Meal      Meal[]
+  Expense   Expense[]
+  isDeleted Boolean   @default(false)
+  Bazer     Bazer[]
 }
 
 model Meal {
@@ -36,11 +37,22 @@ model Meal {
 }
 
 model Expense {
+  id               String          @id @default(auto()) @map("_id") @db.ObjectId
+  date             DateTime        @default(now())
+  amount           Int
+  user_id          String          @db.ObjectId
+  transaction_type TransactionType
+  user             User            @relation(fields: [user_id], references: [id])
+  purpose          Epurpose
+}
+
+model Bazer {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  date    DateTime
   user_id String   @db.ObjectId
   user    User     @relation(fields: [user_id], references: [id])
-  purpose Epurpose
+  date    DateTime @default(now())
+  items   String[]
+  amount  Int
 }
 
 enum UserRole {
@@ -51,4 +63,9 @@ enum UserRole {
 enum Epurpose {
   meal
   rent
+}
+
+enum TransactionType {
+  add
+  get
 }
